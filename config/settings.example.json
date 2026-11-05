@@ -1,0 +1,16 @@
+{
+  "hub": "you@gmail.com",
+  "readers": ["You"],
+  "accounts": [
+    { "label": "Main", "email": "you@gmail.com", "how": "hub" },
+    { "label": "Work", "email": "you@yourcompany.com", "how": "forward" },
+    { "label": "Personal", "email": "you@yahoo.com", "how": "forward", "status": "optional" }
+  ],
+  "calendars": [
+    { "label": "Main", "id": "you@gmail.com", "kind": "live", "main": true },
+    { "label": "Family", "id": "<published ics url>", "kind": "feed" }
+  ],
+  "hours": { "start": "07:00", "end": "19:00", "timezone": "America/Los_Angeles", "days": ["Mon","Tue","Wed","Thu","Fri"] },
+  "vip": [],
+  "ignore": []
+}

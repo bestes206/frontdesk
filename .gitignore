@@ -1,0 +1,4 @@
+config/frontdesk.json
+config/*.local.json
+.DS_Store
+*.plugin
