@@ -13,7 +13,7 @@ Run the front desk on the maintainer's accounts for a few days: forwarding in, h
 
 ## Step 1. Create the hub
 
-The person creates a new Gmail just for the front desk (their own account, their own password; the maintainer never holds it). Everything forwards into it and it's the only account Claude reads, so their real accounts stay untouched and turning it all off is one deletion. First thing after creating it: a filter `to:(the new address)` → Never send to Spam, because new accounts spam-filter forwarded mail. Expect a few days of aging. Then add it to the Gmail app on their phone so the page's Open links land in it.
+The person creates a new Gmail just for the front desk (their own account, their own password; the maintainer never holds it). Everything forwards into it and it's the only account Claude reads, so their real accounts stay untouched and turning it all off is one deletion. New accounts spam-filter forwarded mail for a few days; the hourly run reads spam too, so nothing is lost. Then add it to the Gmail app on their phone so the page's Open links land in it.
 
 ## Step 2. Connect Claude
 
@@ -31,9 +31,9 @@ The app someone reads mail in (Outlook, Apple Mail, the Gmail app) is irrelevant
 
 Any work Microsoft 365 mailbox: try an inbox rule or mailbox forwarding to the hub and send a test. A bounce about external forwarding means the tenant blocks it. Then try the Claude Microsoft 365 connector; if it asks for an administrator, it needs their IT. If both fail, email IT once with the exact ask and launch without that mailbox.
 
-## Step 4. Hub filters
+## Step 4. Hub filters (maintainer tests only)
 
-In the hub's Gmail settings, one filter per forwarded account: `to:(the-forwarded-address)` → apply label `Frontdesk/Forwarded`, Never send to Spam. (No need to skip the inbox: nobody reads this inbox but the front desk.)
+A fresh hub needs no filters: the hourly run searches spam too. Only when the hub is an inbox someone actually reads (a maintainer testing on their own account) add one filter per forwarded account: `to:(the-forwarded-address)` → Skip the Inbox, label `Frontdesk/Forwarded`.
 
 ## Step 5. Calendars
 

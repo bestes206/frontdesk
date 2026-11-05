@@ -25,3 +25,9 @@ Added Check now to the page: it fires the hourly task on demand through the view
 
 ## 2026-11-05 · 0.3.5
 The hub is now a new Gmail created for the front desk, not an existing account: real accounts stay untouched, one deletion turns it all off. Open links use authuser so they land in the hub even with several accounts signed in. Items clear via Handled, since the hub never sees the person's sent mail.
+
+## 2026-11-05 · 0.4.0
+Setup rewritten after the first live run: buttons everywhere (freeform only for addresses and a name); Claude does forwarding and calendar sharing in the browser when it can; one account at a time with a check; hub filters removed from the user path (the run reads spam); first page shown before tuning; VIPs and ignores proposed from their own top senders as tick lists; hours as presets.
+
+## 2026-11-05 · 0.4.1
+Setup handles the browser gracefully: enables it itself when it's just off, offers manual steps only when there's no browser (phone), explains the allow prompt and sign-in and how to bring the pane back, and falls back to steps if a site is blocked or declined.

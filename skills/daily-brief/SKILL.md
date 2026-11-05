@@ -29,7 +29,7 @@ Clear the taps once applied.
 
 ## 3. Collect what's new
 
-Mail: search the hub for messages newer than `last_checked`, everywhere (inbox and the `Frontdesk/Forwarded` label). Exclude anything in trash or spam. Dedupe by Message-ID. For each message note the account it came from (the original To / Delivered-To address matched to `accounts`), its Gmail message id, and its link: `https://mail.google.com/mail/?authuser=<hub address>#all/<gmail message id>`, which opens the hub's copy in the right account even when several are signed in.
+Mail: search the hub for messages newer than `last_checked`, everywhere: inbox, all mail, and spam (forwarded mail into a new account often lands in spam at first, so spam counts as normal mail here). Exclude trash. Dedupe by Message-ID. For each message note the account it came from (the original To / Delivered-To address matched to `accounts`), its Gmail message id, and its link: `https://mail.google.com/mail/?authuser=<hub address>#all/<gmail message id>`, which opens the hub's copy in the right account even when several are signed in.
 
 Calendar: read today and tomorrow on every calendar in settings. Note anything that changed since the state's calendar snapshot. Calendars marked `feed` refresh slowly; never say one changed today.
 

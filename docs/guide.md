@@ -14,7 +14,7 @@ Create a new Gmail account just for this (gmail.com → Create account). It's wh
 On your phone, allow notifications from the Claude app. That's how it tells you when something needs you.
 
 ## 4. Run the setup
-Open a new chat in Claude and paste the prompt below. It will ask you about your other email accounts, who always needs a same-day answer, what you never want to see, and which calendar to add appointments to. It shows you real emails from your inbox along the way so you can say "yes, those" or "no, not those."
+On your computer, open a new chat in Claude and paste the prompt below. It will ask you about your other email accounts, who always needs a same-day answer, what you never want to see, and which calendar to add appointments to. It shows you real emails from your inbox along the way so you can say "yes, those" or "no, not those."
 
 > Read https://raw.githubusercontent.com/bestes206/frontdesk/main/skills/onboard/SKILL.md and follow it to set up my front desk.
 

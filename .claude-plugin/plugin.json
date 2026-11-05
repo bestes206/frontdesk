@@ -1,6 +1,6 @@
 {
   "name": "frontdesk",
-  "version": "0.3.5",
+  "version": "0.4.1",
   "description": "An inbox and calendar assistant that keeps one page current: what needs you, commitments to add, and the day's calendar. Runs on the person's own Claude account. First agent of the office.",
   "author": {
     "name": "Bryan Estes"
