@@ -30,7 +30,7 @@ Hourly is the scheduled-task floor. Later: reading texts, calling, drafting repl
 - Learned VIPs and ignores show in the page footer; the weekly review moves them into settings and fixes the skill.
 
 ## Conventions
-- Page title: `Front Desk`. Forwarded-mail label in the hub: `Frontdesk/Forwarded`. Message links: `https://mail.google.com/mail/u/0/#all/<gmail message id>` (opens the hub's copy).
+- The hub is a new Gmail the person creates just for the front desk; their real accounts forward into it and stay untouched. Page title: `Front Desk`. Forwarded-mail label: `Frontdesk/Forwarded`. Message links: `https://mail.google.com/mail/?authuser=<hub>#all/<gmail message id>` (opens the hub's copy in the right account).
 - Hours, readers, accounts, VIPs, ignores live in settings, never in the skill.
 - Version bump on every behavior change.
 

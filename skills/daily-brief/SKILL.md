@@ -15,7 +15,7 @@ Work in the settings' timezone. Outside `hours`, do nothing and end with `Outsid
 
 ## 1. Open the page and its state
 
-The page is the artifact titled `Front Desk` on this account. Read its stored state: `last_checked`, the list of items currently shown (each with an id, status, and the message it came from), learned VIPs and ignores, and any taps the reader made since the last run (`handled`, `add`, `always_flag`, `never_show`).
+The page is the artifact titled `Front Desk` on this account. It is published with the `db` and `user` capabilities for state and taps, and the `mcp` capability declaring the `Claude Code Remote` connector with only the fire-scheduled-task tool. Read its stored state: `last_checked`, the list of items currently shown (each with an id, status, and the message it came from), learned VIPs and ignores, and any taps the reader made since the last run (`handled`, `add`, `always_flag`, `never_show`).
 
 No page yet: this is the first run. Create it in step 5 with empty state and treat `last_checked` as the start of today.
 
@@ -29,7 +29,7 @@ Clear the taps once applied.
 
 ## 3. Collect what's new
 
-Mail: search the hub for messages newer than `last_checked`. Search everywhere, not just the inbox: forwarded mail sits under the `Frontdesk/Forwarded` label and skips the inbox. Exclude anything in trash or spam. Dedupe by Message-ID. For each message note the account it came from (the original To / Delivered-To address matched to `accounts`), its Gmail message id, and its link: `https://mail.google.com/mail/u/0/#all/<gmail message id>`.
+Mail: search the hub for messages newer than `last_checked`, everywhere (inbox and the `Frontdesk/Forwarded` label). Exclude anything in trash or spam. Dedupe by Message-ID. For each message note the account it came from (the original To / Delivered-To address matched to `accounts`), its Gmail message id, and its link: `https://mail.google.com/mail/?authuser=<hub address>#all/<gmail message id>`, which opens the hub's copy in the right account even when several are signed in.
 
 Calendar: read today and tomorrow on every calendar in settings. Note anything that changed since the state's calendar snapshot. Calendars marked `feed` refresh slowly; never say one changed today.
 
@@ -53,7 +53,9 @@ One page, mobile first, readable without scrolling for the top section. In order
 - **Commitments**: what, when, with whom, conflict if any, `Add`.
 - **Today** and **Tomorrow**: every event across the calendars, conflicts first, with the calendar's label.
 - **FYI**: up to 5 lines, collapsed by default.
-- Footer: `Last checked`, and the learned VIPs and ignores so the maintainer can move them into settings.
+- Footer: `Last checked`, a `Check now` button, and the learned VIPs and ignores so the maintainer can move them into settings.
+
+**Check now and instant taps.** The page declares the viewer's `Claude Code Remote` connector with the one tool that fires a scheduled task on demand, and stores the task id from settings (`task_id`). `Check now` fires the task; it greys out for two minutes after a tap. Handled, Add, Always flag, and Never show write the tap to state and then fire the task too, with a note saying what was tapped, so the change lands within a minute or two instead of at the next hour. If the connector isn't granted or `task_id` is empty, the buttons still write state and the hourly run picks it up; say "applies at the next check" under the button.
 
 Store the new state: `last_checked` = now, the items shown, the calendar snapshot, learned lists. Plain words, no preamble. Never show codes, passwords, or account numbers from mail.
 

@@ -16,3 +16,12 @@ Added the reader-facing guide (docs/guide.md) and the onboarding conversation (s
 
 ## 2026-11-05 · 0.3.2
 Published the Module 0 page (Front Desk Setup artifact). Prompts now read the skills from the public repo's raw main URLs, so a push updates every install; the person never needs GitHub.
+
+## 2026-11-05 · 0.3.3
+Onboarding now works out the provider behind each address (Gmail, Outlook.com, Yahoo, work Microsoft 365, other) rather than trusting the app name, and gives Outlook.com forwarding steps. Setup runbook adds the Outlook.com path.
+
+## 2026-11-05 · 0.3.4
+Added Check now to the page: it fires the hourly task on demand through the viewer's scheduled-tasks connector. The four taps fire it too, with a note, so Add and Handled land within minutes. Onboarding records the task id as `task_id`.
+
+## 2026-11-05 · 0.3.5
+The hub is now a new Gmail created for the front desk, not an existing account: real accounts stay untouched, one deletion turns it all off. Open links use authuser so they land in the hub even with several accounts signed in. Items clear via Handled, since the hub never sees the person's sent mail.

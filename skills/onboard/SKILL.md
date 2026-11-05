@@ -11,13 +11,15 @@ You are setting up the front desk for the person you're talking to. Plain words,
 
 Search their Gmail for the newest message and list today's calendar. If either fails, stop and tell them which connector to connect (Settings → Connectors → Gmail, Google Calendar) and to come back.
 
-Tell them which Gmail you're connected to. That's the hub.
+Tell them which Gmail you're connected to. That's the hub: the new account they created for the front desk. If it looks like a personal or work account instead (mail from real people, old history), say so and ask whether they meant to create a separate one; the guide recommends it so their real accounts stay untouched. Then make sure the hub has a filter `to:(the hub address)` → Never send to Spam, and ask them to add the hub to the Gmail app on their phone so Open links work.
 
 ## 2. Their other mailboxes
 
-Ask: "Which other email accounts do you check? List every address, work and personal." For each one, ask what to call it on the page (a short label like `Work` or `Personal`).
+Ask: "Which other email accounts do you check? List every address, work and personal." For each one, ask what to call it on the page (a short label like `Work` or `Personal`), and work out what kind of account it is from the address or by asking. People name the app they read it in ("my Outlook", "the Mail app"), which says nothing; the provider behind the address decides the forwarding steps: Gmail, Yahoo, Outlook.com (a personal Microsoft account), a work Microsoft 365 mailbox (a company domain), or something else.
 
-Then search the hub for the label `Frontdesk/Forwarded`. For each address they named, check whether forwarded mail from it is already arriving. For any that isn't, show them the forwarding steps for that provider (Gmail: Settings → Forwarding; Yahoo: needs Mail Plus; a work Microsoft 365 account: try an inbox rule, and if it bounces, their IT has to allow it) and tell them it's fine to finish forwarding later; the page will just say that account isn't connected yet.
+Then search the hub for forwarded mail. For each address they named, check whether forwarded mail from it is already arriving. For any that isn't, show them the forwarding steps for that provider (Gmail: Settings → See all settings → Forwarding; Outlook.com: Settings → Mail → Forwarding, free; Yahoo: needs Mail Plus; a work Microsoft 365 mailbox: try an inbox rule or mailbox forwarding, and if it bounces, their IT has to allow it; anything else: look for Forwarding in that provider's settings) and tell them it's fine to finish forwarding later; the page will just say that account isn't connected yet.
+
+For each forwarded address, also give them the hub-side filter to create in the hub's Gmail settings: match `to:(that address)`, apply the label `Frontdesk/Forwarded`, Never send to Spam. If the hub is an existing account they actually read (not a fresh one), add Skip the Inbox to that filter so the copies never appear in their inbox.
 
 ## 3. What urgent means to them
 
@@ -42,6 +44,6 @@ Ask what hours and days it should check, and who else will read the page.
 
 ## 6. Write it back
 
-Show them the finished settings block as plain language first ("I'll watch these 4 accounts, flag anything from these 6 people, hide these 3 senders, add appointments to your Work calendar, and check hourly 7am to 7pm Monday to Saturday"). Then produce the JSON settings block and the full task prompt: one line, `Read https://raw.githubusercontent.com/bestes206/frontdesk/main/skills/daily-brief/SKILL.md and follow it exactly as this run's instructions.`, then `## Settings` and the JSON. If you can create a scheduled task from here, create it: hourly during their hours, Gmail and Google Calendar as the only connectors, phone notifications on, and run it once. If you can't, tell them exactly where to paste the prompt to create it (claude.ai/code/routines, New task), and what to set: hourly, their hours, Gmail and Calendar only, notifications on.
+Show them the finished settings block as plain language first ("I'll watch these 4 accounts, flag anything from these 6 people, hide these 3 senders, add appointments to your Work calendar, and check hourly 7am to 7pm Monday to Saturday"). Then produce the JSON settings block and the full task prompt: one line, `Read https://raw.githubusercontent.com/bestes206/frontdesk/main/skills/daily-brief/SKILL.md and follow it exactly as this run's instructions.`, then `## Settings` and the JSON. If you can create a scheduled task from here, create it: hourly during their hours, Gmail and Google Calendar as the only connectors, phone notifications on. Put the new task's id into the settings as `task_id` (the page's Check now button fires it) and run it once. If you can't, tell them exactly where to paste the prompt to create it (claude.ai/code/routines, New task), and what to set: hourly, their hours, Gmail and Calendar only, notifications on. Then ask them for the task's id from its page (it starts with `trig_`) and tell them to add it to the settings block as `task_id` so the page's Check now button works; until then the buttons apply at the next hourly check.
 
 Finish by telling them what the first page will look like and that tapping Handled, Always flag, or Never show is how they teach it.

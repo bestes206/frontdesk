@@ -11,5 +11,6 @@
 | `hours` | Working hours, days, timezone. |
 | `vip` | Senders or domains that always need a same-day answer. |
 | `ignore` | Senders, domains, or subjects dropped before triage. |
+| `task_id` | The hourly scheduled task's id (`trig_...`). The page's Check now button and the instant taps fire it. Empty means taps apply at the next hourly check. |
 
 VIPs and ignores learned from page taps show in the page footer until the weekly review moves them here.

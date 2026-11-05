@@ -11,9 +11,9 @@ Everything lives on the person's own accounts. The maintainer never holds their 
 
 Run the front desk on the maintainer's accounts for a few days: forwarding in, hourly task, page updates, push notification, an `Add` tap creating an event. Fix the skill until it's boring.
 
-## Step 1. Pick the hub
+## Step 1. Create the hub
 
-One Gmail the person owns that Claude connects to. An existing account they already read, or a new Gmail they create for this. If new, expect a few days before forwarded mail stops landing in spam.
+The person creates a new Gmail just for the front desk (their own account, their own password; the maintainer never holds it). Everything forwards into it and it's the only account Claude reads, so their real accounts stay untouched and turning it all off is one deletion. First thing after creating it: a filter `to:(the new address)` → Never send to Spam, because new accounts spam-filter forwarded mail. Expect a few days of aging. Then add it to the Gmail app on their phone so the page's Open links land in it.
 
 ## Step 2. Connect Claude
 
@@ -23,17 +23,21 @@ On their Claude account (Pro or higher; scheduled tasks need a paid plan), conne
 
 Each Gmail: Settings → Forwarding → add the hub → confirmation code arrives in the hub → confirm → "Forward a copy and keep Gmail's copy."
 
+Outlook.com (personal Microsoft account): Settings → Mail → Forwarding → enter the hub, keep a copy. Free. The Microsoft 365 connector does not support personal accounts, so forwarding is the only path.
+
 Yahoo: forwarding needs Yahoo Mail Plus (about $5/month). Their call; if no, leave it out.
+
+The app someone reads mail in (Outlook, Apple Mail, the Gmail app) is irrelevant; the account's provider sets the path.
 
 Any work Microsoft 365 mailbox: try an inbox rule or mailbox forwarding to the hub and send a test. A bounce about external forwarding means the tenant blocks it. Then try the Claude Microsoft 365 connector; if it asks for an administrator, it needs their IT. If both fail, email IT once with the exact ask and launch without that mailbox.
 
 ## Step 4. Hub filters
 
-In the hub's Gmail settings, one filter per forwarded account: `to:(the-forwarded-address)` → Skip the Inbox, apply label `Frontdesk/Forwarded`, Never send to Spam.
+In the hub's Gmail settings, one filter per forwarded account: `to:(the-forwarded-address)` → apply label `Frontdesk/Forwarded`, Never send to Spam. (No need to skip the inbox: nobody reads this inbox but the front desk.)
 
 ## Step 5. Calendars
 
-Share each calendar with the hub (see all event details) and mark one `main`: that's where `Add` puts events. Outlook and family calendars that can't be shared: subscribe the hub's Google Calendar to their published ICS link and mark them `feed`.
+Share each of their real calendars with the hub account: see all event details for most, make changes to events for the one marked `main`, since that's where `Add` puts events. Outlook and family calendars that can't be shared: subscribe the hub's Google Calendar to their published ICS link and mark them `feed`.
 
 ## Step 6. Three questions
 
