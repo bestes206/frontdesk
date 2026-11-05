@@ -4,7 +4,7 @@ The front desk of the office: one assistant that reads every inbox and calendar 
 
 Everything runs on the person's own Claude account and their own Gmail. The maintainer never holds their mail.
 
-First agent of the **office** ecosystem. Later agents (studio, foreman, scout, chief) get their own repos so each keeps its own narrow access.
+First agent of the **office** ecosystem. Later agents get their own repos so each keeps its own narrow access.
 
 ## What it does
 
