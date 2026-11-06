@@ -1,0 +1,170 @@
+<title>Front Desk</title>
+<!-- frontdesk page template v0.6.2 -->
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: single narrow column, phone first; headline, Needs you, Commitments, Today/Tomorrow, FYI, footer */
+:root{--bg:#f6f7f5;--fg:#1c2421;--mut:#5f6b66;--line:#d9ded9;--card:#fff;--acc:#0f6b5c;--accfg:#fff;--warn:#b4531a;--warnbg:#fbeee3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111715;--fg:#e8eeea;--mut:#9aa8a1;--line:#2b3631;--card:#1a221f;--acc:#4cc2ac;--accfg:#08201a;--warn:#f0a068;--warnbg:#33241a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111715;--fg:#e8eeea;--mut:#9aa8a1;--line:#2b3631;--card:#1a221f;--acc:#4cc2ac;--accfg:#08201a;--warn:#f0a068;--warnbg:#33241a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.45 "IBM Plex Sans",system-ui,sans-serif;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+h1{font:600 28px/1.1 "IBM Plex Sans",sans-serif;margin:0}
+.title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.date{font:14px "IBM Plex Mono",monospace;color:var(--mut);white-space:nowrap}
+h2{font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:0 0 8px}
+.sub{color:var(--mut);font:13px "IBM Plex Mono",monospace}
+.lead{margin:0;font:16px/1.4 "IBM Plex Sans",sans-serif}
+header{display:flex;flex-direction:column;gap:10px}
+.status{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;font:14px "IBM Plex Sans",sans-serif;color:var(--mut)}
+.status #meta{min-width:0;overflow-wrap:anywhere}
+.status.on{color:var(--fg)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none}
+.status.on .dot{background:var(--acc)}
+@media (prefers-reduced-motion:no-preference){.status.on .dot{animation:pulse 1.2s ease-in-out infinite}}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.status button{white-space:nowrap}
+.item{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:8px;min-width:0}
+.item p{margin:0 0 8px;overflow-wrap:anywhere}
+.item .top{display:flex;align-items:baseline;gap:8px;margin:0 0 2px}
+.item .from{font:500 15px "IBM Plex Sans",sans-serif;color:var(--fg);min-width:0;overflow-wrap:anywhere}
+.item .when{margin-left:auto;font:12px "IBM Plex Mono",monospace;color:var(--mut);white-space:nowrap}
+.item .subj{margin:0 0 8px;font:14px "IBM Plex Sans",sans-serif;color:var(--mut);overflow-wrap:anywhere}
+.item .ask{margin:0 0 4px;font:500 15px "IBM Plex Sans",sans-serif}
+.item .ctx{margin:0 0 10px;color:var(--mut);font-size:14px}
+.tagc{display:inline-block;font:11px "IBM Plex Mono",monospace;color:var(--mut);border:1px solid var(--line);border-radius:3px;padding:1px 6px;vertical-align:middle;margin-left:6px}
+.tagc.due{color:var(--warn);border-color:var(--warn)}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+button,a.btn{font:500 13px "IBM Plex Sans",sans-serif;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:4px;padding:6px 10px;cursor:pointer;text-decoration:none}
+button.p,a.btn.p{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button:disabled{opacity:.5;cursor:default}
+.ev{display:grid;grid-template-columns:5.5em 1fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--line)}
+.ev time{font:13px "IBM Plex Mono",monospace;color:var(--mut)}
+.ev.c{background:var(--warnbg);color:var(--warn);padding-inline:6px}
+.ev.past{opacity:.45}
+.tag{font:11px "IBM Plex Mono",monospace;color:var(--mut)}
+details summary{cursor:pointer}
+.empty{color:var(--mut)}
+.ask{font:13px "IBM Plex Sans",sans-serif;color:var(--mut);margin:0 0 6px}
+.chip{font:500 13px "IBM Plex Sans",sans-serif;border:1px solid var(--acc);color:var(--acc);background:transparent;border-radius:999px;padding:5px 10px;cursor:pointer}
+.chip.x{border-color:var(--line);color:var(--mut)}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line)}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--mut);font:500 15px "IBM Plex Sans",sans-serif;padding:10px 14px;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--acc)}
+.tabs .n{font:12px "IBM Plex Mono",monospace;color:var(--mut);margin-left:6px}
+.pane{display:flex;flex-direction:column;gap:22px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<main>
+<header><div class="title"><h1>Front Desk</h1><span class="date" id="head"></span></div><p id="lead" class="lead">Loading…</p><div class="status" id="status"><span class="dot"></span><span id="meta">Loading…</span><button id="check" class="p">Check now</button></div><p class="sub" id="note"></p></header>
+<nav class="tabs" role="tablist"><button role="tab" id="tab-inbox" aria-selected="true">Inbox<span class="n" id="n-inbox"></span></button><button role="tab" id="tab-calendar" aria-selected="false">Calendar<span class="n" id="n-calendar"></span></button></nav>
+<div class="pane" id="pane-inbox">
+<section><h2>Needs you</h2><div id="needs"><p class="empty">Loading…</p></div></section>
+<section><h2>Commitments</h2><div id="commits"><p class="empty">None to add.</p></div></section>
+<section><details><summary><h2 style="display:inline">FYI</h2></summary><div id="fyi" style="margin-top:8px"></div></details></section>
+<p class="sub" id="learned"></p>
+</div>
+<div class="pane" id="pane-calendar" hidden>
+<p class="lead" id="callead"></p>
+<section><h2>Today</h2><div id="today"></div><h2 style="margin-top:16px">Tomorrow</h2><div id="tomorrow"></div></section>
+</div>
+<footer></footer>
+</main>
+<script>
+(async function(){
+var TASK="{{TASK_ID}}",S=null,db=null,mcp=null,checking=null,lastSeen=null,slowTimer=null;
+function shortWhen(t){var wd=new Date().toLocaleDateString([],{weekday:"short"});return t.indexOf(wd+" ")===0?t.slice(wd.length+1):t}
+function clock(d){return d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}
+function setStatus(){
+  var st=document.getElementById("status"),m=document.getElementById("meta"),b=document.getElementById("check");
+  if(checking){st.classList.add("on");m.textContent="Checking\u2026 since "+clock(checking);b.disabled=true;}
+  else{st.classList.remove("on");m.textContent=S?("Checked "+shortWhen(S.checked||"")+" \u00b7 "+S.accounts+" accounts"):"Loading\u2026";b.disabled=false;}
+}
+function startChecking(){
+  checking=new Date();setStatus();
+  clearTimeout(slowTimer);slowTimer=setTimeout(function(){if(checking){document.getElementById("meta").textContent="Still checking, this can take a few minutes (started "+clock(checking)+")"}},300000);
+}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function header(i){
+  var f=document.createDocumentFragment();
+  var top=el("div","top");var from=el("span","from",i.sender||"");
+  if(i.account)from.appendChild(el("span","tagc",i.account));
+  if(i.due)from.appendChild(el("span","tagc due","by "+i.due));
+  top.appendChild(from);if(i.when)top.appendChild(el("span","when",i.when));f.appendChild(top);
+  if(i.subject)f.appendChild(el("p","subj",i.subject));
+  return f;
+}
+function body(i){
+  var f=document.createDocumentFragment();
+  if(i.ask){f.appendChild(el("p","ask",i.ask));var ctx=i.gist||i.text||"";if(ctx&&ctx!==i.ask)f.appendChild(el("p","ctx",ctx));}
+  else f.appendChild(el("p",null,i.gist||i.text||i.what||""));
+  return f;
+}
+async function tap(kind,id,sender,scope,value){
+  var note=document.getElementById("note");
+  try{ if(db) await db.collection("taps").doc(kind+"-"+id+"-"+Date.now()).set({kind:kind,id:id,sender:sender||"",scope:scope||"",value:value||"",at:Date.now()}); note.textContent="Saved. Applies at the next check."; }catch(e){note.textContent="Could not save that tap."}
+  try{ if(mcp){ startChecking(); await mcp.callTool("Claude Code Remote","fire_trigger",{trigger_id:TASK}); note.textContent="Saved. Check started."; } }catch(e){ checking=null; setStatus(); }
+}
+function clarify(card,row,i,kind,label){
+  var q=el("div");var p=el("p","ask",label+"…");q.appendChild(p);var cr=el("div","row");
+  var opts=[];
+  if(i.sender)opts.push(["sender",i.sender,"from "+i.sender]);
+  (i.keywords||[]).slice(0,3).forEach(function(k){opts.push(["keyword",k,"about \u201c"+k+"\u201d"])});
+  opts.forEach(function(o){var c=el("button","chip",o[2]);c.onclick=function(){tap(kind,i.id,i.sender,o[0],o[1]);q.replaceWith(el("p","ask","Got it: "+label.toLowerCase()+" "+o[2]+"."))};cr.appendChild(c)});
+  var x=el("button","chip x","Cancel");x.onclick=function(){q.replaceWith(row)};cr.appendChild(x);
+  q.appendChild(cr);row.replaceWith(q);
+}
+var TAB="inbox";
+function showTab(t){TAB=t;["inbox","calendar"].forEach(function(k){document.getElementById("pane-"+k).hidden=(k!==t);document.getElementById("tab-"+k).setAttribute("aria-selected",k===t?"true":"false")});try{localStorage.setItem("frontdesk-tab",t)}catch(e){}}
+try{var saved=localStorage.getItem("frontdesk-tab");if(saved==="calendar")showTab("calendar")}catch(e){}
+document.getElementById("tab-inbox").onclick=function(){showTab("inbox")};
+document.getElementById("tab-calendar").onclick=function(){showTab("calendar")};
+function render(){
+  if(!S){return}
+  var n=S.needs||[],c=S.commits||[];
+  var dt=new Date();document.getElementById("head").textContent=dt.toLocaleDateString([],{weekday:"short",month:"short",day:"numeric"});
+  var parts=[];if(n.length)parts.push(n.length+(n.length===1?" thing needs you.":" things need you."));
+  if(c.length)parts.push(c.length+(c.length===1?" appointment ready to add to your calendar.":" appointments ready to add to your calendar."));
+  document.getElementById("lead").textContent=parts.length?parts.join(" "):"Nothing needs you right now.";
+  function pairs(list){return Math.ceil(list.filter(function(e){return e.conflict}).length/2)}
+  var ct=pairs(S.today||[]),cm=pairs(S.tomorrow||[]),conf=ct+cm;
+  document.getElementById("n-inbox").textContent=(n.length+c.length)||"";
+  document.getElementById("n-calendar").textContent=conf?(conf+" overlap"+(conf>1?"s":"")):"";
+  var cl=[];if(ct)cl.push(ct+(ct===1?" overlap today":" overlaps today"));if(cm)cl.push(cm+(cm===1?" overlap tomorrow":" overlaps tomorrow"));
+  document.getElementById("callead").textContent=cl.length?cl.join(", ")+".":"No overlaps today or tomorrow.";
+  if(lastSeen&&S.last_checked&&S.last_checked!==lastSeen){checking=null;clearTimeout(slowTimer);}
+  lastSeen=S.last_checked||lastSeen;
+  setStatus();
+  var N=document.getElementById("needs");N.textContent="";
+  n.forEach(function(i){var d=el("div","item");
+    if(i.sender||i.subject||i.account||i.when)d.appendChild(header(i));
+    d.appendChild(body(i));
+    var r=el("div","row");
+    if(i.link){var a=el("a","btn","View email");a.href=i.link;a.target="_blank";a.rel="noopener";r.appendChild(a)}
+    var hb=el("button",null,"Handled");hb.onclick=function(){hb.disabled=true;tap("handled",i.id,i.sender)};r.appendChild(hb);
+    [["always_flag","Always flag","Always flag messages"],["never_show","Never show","Never show messages"]].forEach(function(k){var b=el("button",null,k[1]);b.onclick=function(){clarify(d,r,i,k[0],k[2])};r.appendChild(b)});
+    d.appendChild(r);N.appendChild(d)});
+  if(!n.length)N.appendChild(el("p","empty","Nothing needs you."));
+  var C=document.getElementById("commits");C.textContent="";
+  c.forEach(function(i){var d=el("div","item");
+    if(i.sender||i.subject)d.appendChild(header(i));
+    d.appendChild(body(i));
+    var r=el("div","row");var b=el("button","p","Add to calendar");b.onclick=function(){b.disabled=true;b.textContent="Adding…";tap("add",i.id)};r.appendChild(b);
+    var sk=el("button",null,"Skip");sk.onclick=function(){d.remove();tap("skip",i.id)};r.appendChild(sk);
+    if(i.link){var a=el("a","btn","View email");a.href=i.link;a.target="_blank";a.rel="noopener";r.appendChild(a)}
+    d.appendChild(r);C.appendChild(d)});
+  if(!c.length)C.appendChild(el("p","empty","None to add."));
+  ["today","tomorrow"].forEach(function(k){var T=document.getElementById(k);T.textContent="";
+    var nowMin=new Date().getHours()*60+new Date().getMinutes();
+    function mins(t){var m=/(\d+):(\d+)\s*(AM|PM)/i.exec(t||"");if(!m)return null;var h=parseInt(m[1],10)%12+(m[3].toUpperCase()==="PM"?12:0);return h*60+parseInt(m[2],10)}
+    (S[k]||[]).forEach(function(e){var pm=mins(e.t);var past=(k==="today"&&pm!==null&&pm<nowMin);var d=el("div","ev"+(e.conflict?" c":"")+(past?" past":""));d.appendChild(el("time",null,e.t));var s=el("div");s.appendChild(document.createTextNode(e.what+" "));s.appendChild(el("span","tag","· "+e.cal));if(e.conflict)s.appendChild(el("div","tag",e.conflict));d.appendChild(s);T.appendChild(d)});
+    if(!(S[k]||[]).length)T.appendChild(el("p","empty","No events."))});
+  var F=document.getElementById("fyi");F.textContent="";(S.fyi||[]).forEach(function(t){F.appendChild(el("p",null,typeof t==="string"?t:(t.gist||t.text||"")))});
+  document.getElementById("learned").textContent="Always flag: "+((S.vips||[]).join(", ")||"none")+" · Never show: "+((S.ignores||[]).join(", ")||"none");
+}
+document.getElementById("check").onclick=function(){tap("check","now")};
+try{ var cl=window.claude; if(cl){ db=await cl.use("db"); mcp=await cl.use("mcp"); } }catch(e){}
+if(db){ db.doc("state/main").onSnapshot(function(s){ if(s&&s.exists!==false){ S=(s.data?s.data():s)||null; render() } },function(){document.getElementById("head").textContent="Could not load"}); }
+else document.getElementById("head").textContent="Sign in to see Front Desk";
+})();
+</script>

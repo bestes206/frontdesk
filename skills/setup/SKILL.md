@@ -50,7 +50,7 @@ Show them the page buttons: Open, Handled, Add, Always flag, Never show.
 
 ## Step 7. Create the task
 
-Build the prompt from `tasks/daily-brief.md`. Create one cloud scheduled task on their account: hourly during their hours, a Sonnet-class model, Gmail and Calendar as its only connectors, phone notifications on. Fire it once by hand, open the page together, and check it against their inbox.
+Build the prompt from `tasks/daily-brief.md`. Create one cloud scheduled task on their account: hourly during their hours, a Sonnet-class model, Gmail and Calendar as its connectors (extras can stay if the page won't remove them), phone notifications on. Fire it once by hand, open the page together, and check it against their inbox.
 
 ## Step 8. First two weeks
 

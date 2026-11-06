@@ -6,7 +6,7 @@ One cloud scheduled task on the person's own Claude account. The whole job is in
 
 **Model:** Sonnet-class.
 
-**Connectors:** Gmail and Google Calendar only. Remove every other connector.
+**Connectors:** Gmail and Google Calendar. The task picks up every connector on the account and the UI may not allow removing the rest; the skill restricts itself to those two, so leave it.
 
 **Notifications:** push on. The run's final line is the notification text; the skill writes `Checked, nothing new.` on quiet runs so nothing fires.
 

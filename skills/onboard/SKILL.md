@@ -26,15 +26,15 @@ Store the hub address. Pick the page labels yourself from each address's domain 
 
 ## 2. Connect the other accounts
 
-Ask once: "What other email addresses do you check? Type them separated by commas." (This is the one blank in the setup.) Work out each one's provider from the address: Gmail, Outlook.com or Hotmail, Yahoo, a company domain (work Microsoft 365 or Google Workspace), or other.
+Ask: "What's one other email address you check?" (Typing an address is the one blank in the setup; if you already know their addresses, offer them as choices instead.) Work out its provider from the address: Gmail, Outlook.com or Hotmail, Yahoo, a company domain (work Microsoft 365 or Google Workspace), or other. Set that one up fully (below), then ask: **Add another address** / **That's all of them**. Repeat until they're done.
 
-Then handle them **one at a time**, starting with the one that looks most like work. For each, offer buttons:
+For each address, offer buttons:
 
 **Set it up for me** / **Show me the steps** / **Skip for now**
 
 **Before offering "Set it up for me," check the browser.** The built-in browser is the Claude desktop app's own browser pane. If its tools aren't present but a tool to enable it is, enable it (no action from them). If there's no browser at all (they're on a phone, or the desktop app isn't open), offer only **Show me the steps** / **Skip for now**, and add: "If you'd rather I do this for you, open this chat in the Claude app on your computer and say 'set it up for me.'"
 
-*Set it up for me*: first tell them, in two lines, that a browser pane will open beside the chat, that they may get an "allow this site?" prompt (click Allow) and a sign-in page (sign in; you never see the password), and that they can watch or take over at any time. If the pane isn't showing, tell them: Ctrl+Shift+B on Windows, Cmd+Shift+B on Mac, or the globe icon. If the site is blocked or they decline the prompt, say "no problem" and give the manual steps instead. Then:
+*Set it up for me*: first tell them, in two lines, that a browser pane will open beside the chat, that a prompt will ask "Allow Claude to use the browser on <site>?" and they should click **Allow once** (not "Always allow for this website"; once is all this needs). Say they'll likely see that prompt two or three times, because signing in bounces through the provider's sign-in and account sites, and the answer is Allow once each time, that a sign-in page may appear (sign in; you never see the password), that because this is a new browser the provider may ask them to verify with a code sent to their phone or backup email (one time per provider), and that they can watch or take over at any time. While they sign in, if a verification code lands in the hub, read it and give it to them; if it goes to their phone, wait. If the pane isn't showing, tell them: Ctrl+Shift+B on Windows, Cmd+Shift+B on Mac, or the globe icon. If the site is blocked or they click Decline, say "no problem" and give the manual steps instead. If the settings link lands on a marketing or sign-in page instead of settings (common when they aren't signed in yet), click Sign in, let them sign in, then go to the settings link again. Then:
 - Gmail: open `https://mail.google.com/mail/?authuser=<address>#settings/fwdandpop`. Ask them to sign in if the page asks. Click Add a forwarding address, enter the hub, confirm. Then search the hub for the confirmation email from Google, read the code, go back and enter it. Select "Forward a copy of incoming mail" and keep Gmail's copy. Save. Tell them it's done.
 - Outlook.com / Hotmail: open `https://outlook.live.com/mail/0/options/mail/forwarding`. Sign in if asked. Enable forwarding, enter the hub, tick keep a copy, save. Done.
 - Yahoo: forwarding needs Yahoo Mail Plus. Ask with buttons: **I have Mail Plus** / **Skip Yahoo for now** (default). If they have it: open Yahoo settings → Mailboxes → their address → Forwarding, enter the hub, verify via the email that lands in the hub.
@@ -44,9 +44,11 @@ Then handle them **one at a time**, starting with the one that looks most like w
 
 Only touch the forwarding settings page. Don't open, read, or click anything else in their mailbox, and say so before you start.
 
+Do the clicks yourself: the toggle, the address box, the keep-a-copy box, Save. Only if a control genuinely won't respond do you hand that one step to the person, and then you name it exactly as it appears on their screen, in order, like: "Turn on **Enable forwarding**, type `hub@gmail.com` in the box that appears, tick **Keep a copy of forwarded messages**, click **Save**." Never a bare "let me know when it's done." After Save, check the page shows forwarding on, and say so.
+
 *Show me the steps*: give that one provider's steps, four lines at most, then a button **Done** / **Skip for now**. On Done, for Gmail, read the confirmation code out of the hub and give it to them.
 
-After each account: wait up to a minute for any forwarded message to land in the hub (search for mail addressed to that account). If one arrives, say "connected." If not, say "it'll show up once mail arrives" and move on. Then the next account.
+After each account: wait up to a minute for any forwarded message to land in the hub (search for mail addressed to that account). If one arrives, say "connected." If not, say "it'll show up once mail arrives" and move on. Then ask about another address.
 
 ## 3. Calendars
 
@@ -58,7 +60,7 @@ If they named a work account or mentioned kids' sports, ask: "Any other calendar
 
 Build the settings with defaults: hours 7am to 7pm, Monday to Saturday, their timezone, no VIPs, no ignores, readers = them. Then:
 
-- If you can create a scheduled task from here: create it (hourly in those hours, Gmail and Google Calendar as its only connectors, phone notifications on), store its id as `task_id`, run it once, and tell them to open the Front Desk page from their Claude app. Ask with buttons: **Looks right** / **Something's off** (then listen and fix).
+- If you can create a scheduled task from here: create it with the schedule derived from `hours` as `CRON_TZ=<timezone> <a minute between 1 and 59> <start hour>-<end hour> * * <days as 1-6 style>` (7am to 7pm Mon to Sat becomes `43 7-19 * * 1-6`; the start and end hours must match the settings exactly), a Sonnet-class model, Gmail and Google Calendar as its connectors (the task may pick up every connector on the account and the page may not let you remove the extras; that's fine, the check skill only uses those two), auto permission mode, phone notifications on. Then edit the task's instructions to put its new id into the settings as `task_id`, run it once, wait for it to finish, then find the `Front Desk` page in this account's artifacts and give them its link, with: open it once, then on a phone add it to the home screen from the share menu; it's also always in the artifacts gallery at claude.ai/code/artifacts. Ask with buttons: **Looks right** / **Something's off** (then listen and fix).
 - If you can't: show the single prompt to paste at the scheduled-tasks page and the four settings to pick (hourly, their hours, Gmail and Calendar only, notifications on), with buttons **Done** / **I'll do this later**. If Done and you can list scheduled tasks from here, find the new one yourself and store its id. Otherwise offer **Paste the task's id** / **Skip (buttons apply at the next hourly check)**.
 
 ## 5. Make it yours
@@ -74,4 +76,4 @@ If another person will read the page: **Just me** / **Me and someone else** (the
 
 Update the settings in the task (or hand them the updated settings block to paste, with **Done** / **Later**). Run it once more.
 
-Close with three lines: open the page before your mail apps; tap Handled, Add, Always flag, or Never show to teach it; say "tune my front desk" anytime to change these answers.
+Close with four lines: open the page before your mail apps; tap Handled, Add to calendar, Always flag, or Never show to teach it; the first time you tap a button, the page asks to allow "Claude Code Remote" so it can start a check right away, so click Continue; say "tune my front desk" anytime to change these answers.

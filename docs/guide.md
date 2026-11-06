@@ -25,6 +25,6 @@ The setup will tell you which accounts still need forwarding and how. Each one t
 The setup ends by handing you a block of text and telling you where to paste it. That creates the hourly check and the page. Run it once by hand and open the page.
 
 ## Using it
-Open the page before you open your mail. Tap **Open** to read a message, **Handled** when you've dealt with it, **Add** to put a commitment on your calendar, **Always flag** or **Never show** to teach it. It checks every hour and only pings you when something needs you. Tap **Check now** on the page, or tell Claude "run the front desk," when you don't want to wait.
+Open the page before you open your mail. Tap **Open** to read a message, **Handled** when you've dealt with it, **Add to calendar** to put a commitment on your calendar, **Always flag** or **Never show** to teach it. It checks every hour and only pings you when something needs you. Tap **Check now** on the page, or tell Claude "run the front desk," when you don't want to wait.
 
 Questions or something it got wrong: contact whoever set this up for you.

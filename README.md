@@ -16,6 +16,7 @@ First agent of the **office** ecosystem. Later agents get their own repos so eac
 ## Layout
 
 - `skills/daily-brief/` — the job, and the source of the task prompt
+- `page/front-desk.html` — the page every install gets, published verbatim by the run
 - `skills/onboard/` — the conversation a new reader runs on their own account; the guide points at it
 - `skills/setup/` — the maintainer's runbook (step zero, the hard cases)
 - `docs/guide.md` — the reader-facing guide, shared as an artifact
